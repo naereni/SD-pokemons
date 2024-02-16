@@ -2,21 +2,23 @@
 Finetune SD-1.5 to gen new pokemons
 
 ## Install
-
-
-<details>
-  <summary>XFormers on macos</summary>
-  
+### Venv
 ```bash
-brew install libomp
-export PATH="/opt/homebrew/opt/libomp/bin:$PATH"
-export LDFLAGS/CPPFLAGS # get while installing
-brew install llvm
-export LDFLAGS/CPPFLAGS
+python3.11 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-</details>
+### Weights
+Веса для LoRA адаптера лежат по [ссылке](), файл с весами переложить в `src/LoRA-pokemons-weights/`
 
-Отчет с Wandb
+### Data
+Все инструкции находятся в папке `data`
 
-https://wandb.ai/team24/text2image-fine-tune/reports/LoRA-tune-pokemons--Vmlldzo2NzM0Mzk5
+## Usage
+
+## Model
+По сути просто дефолтная **SD-1.5** с **LoRA** адаптером, который натренерован на датасете с покемонами
+Как примет качественного рефакторинга **blob** кода во чтото читаемое
+
+[Отчет с Wandb](https://wandb.ai/team24/text2image-fine-tune/reports/LoRA-tune-pokemons--Vmlldzo2NzM0Mzk5)
