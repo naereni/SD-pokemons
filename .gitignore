@@ -1,8 +1,7 @@
 # train files
-data/dataset
-data/pokedex_(Update_04.21).csv
-src/LoRA-pokemons-weights
-src/test.py
+src/data/dataset
+src/data/pokedex_(Update_04.21).csv
+src/model/LoRA-pokemons-weights
 wandb
 .DS_store
 

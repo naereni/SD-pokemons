@@ -19,8 +19,14 @@ class InferenceModel:
             variant=config.variant,
             torch_dtype=weight_dtype,
         )
+
+        self.pipeline.safety_checker = lambda images, **kwargs: (
+            images,
+            [False] * len(images),
+        )
+
         if device is None:
-            self.device = "mps"  # "cuda" if torch.cuda.is_available() else "cpu"
+            self.device = "cuda" if torch.cuda.is_available() else "cpu"
 
         self.pipeline = self.pipeline.to(device)
         # load attention processors
@@ -29,16 +35,16 @@ class InferenceModel:
         )
         # run inference
         self.generator = torch.Generator(device)
-        if config.seed is not None:
-            self.generator = self.generator.manual_seed(config.seed)
+        if config.infirence_seed is not None:
+            self.generator = self.generator.manual_seed(config.infirence_seed)
 
-    def generate(self, num_images=1):
+    def generate(self, prompt="", num_images=1):
         images = []
         with torch.cuda.amp.autocast():
             for _ in range(num_images):
                 images.append(
                     self.pipeline(
-                        config.validation_prompt,
+                        prompt=config.validation_prompt + prompt,
                         num_inference_steps=config.num_inference_steps,
                         generator=self.generator,
                     ).images[0]

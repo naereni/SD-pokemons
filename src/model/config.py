@@ -8,11 +8,11 @@ https://raw.githubusercontent.com/huggingface/diffusers/main/examples/text_to_im
 class Config:
     # define args
     pretrained_model_name_or_path: str = "runwayml/stable-diffusion-v1-5"
-    train_data_dir: str = "data/dataset"
+    train_data_dir: str = "src/data/dataset"
     validation_prompt: str = (
-        "highres, masterpiece, sugimori ken style, pokemon creature, without a background"
+        "highres, masterpiece, sugimori ken style, pokemon creature, without a background, "
     )
-    output_dir: str = "src/LoRA-pokemons-weights"
+    output_dir: str = "src/model/LoRA-pokemons-weights"
     seed: int = 515786
     resolution: int = 512
     random_flip: bool = True
@@ -27,7 +27,7 @@ class Config:
     lr_scheduler: int = "cosine"
     checkpointing_steps: int = 500
     lr_warmup_steps: int = 0
-    num_inference_steps: int = 3
+    num_inference_steps: int = 30
 
     # defaut args
     image_column: str = "image"
@@ -52,13 +52,14 @@ class Config:
     scale_lr: bool = False
 
     # None args
+    infirence_seed: int = None
     snr_gamma: float = None
     cache_dir: str = None
     max_train_samples: int = None
     dataset_config_name: str = None
     variant: str = None
     revision: str = None
-    dataset_name: str = "lambdalabs/pokemon-blip-captions"
+    dataset_name: str = None
     prediction_type: str = None
     resume_from_checkpoint: str = None
     checkpoints_total_limit: int = None
